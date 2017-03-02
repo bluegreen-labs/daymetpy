@@ -48,4 +48,4 @@ No additional packages are required. Pandas / seaborn is required in the above e
 
 ## Contributors
 * Koen Hufkens: koen.hufkens@gmail.com
-* Colin Talbert: talbertc@usgs.gov
+* Colin Talbert
