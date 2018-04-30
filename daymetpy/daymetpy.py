@@ -47,7 +47,7 @@ def daymet_timeseries(lat=36.0133, lon=-84.2625, start_year=2012, end_year=2014,
     year_range = ",".join([str(i) for i in range(start_year, end_year+1)])
 
     # create download string / url
-    TIMESERIES_URL = "https://daymet.ornl.gov/data/send/saveData?lat={lat}&lon={lon}&measuredParams=tmax,tmin,dayl,prcp,srad,swe,vp&year={year_range}"
+    TIMESERIES_URL = "https://daymet.ornl.gov/single-pixel/api/data?lat={lat}&lon={lon}&vars=tmax,tmin,dayl,prcp,srad,swe,vp&year={year_range}"
     timeseries_url = TIMESERIES_URL.format(lat=lat, lon=lon, year_range=year_range)
       
     if verbose:
@@ -99,7 +99,7 @@ def download_Daymet(site="Daymet",lat=36.0133,lon=-84.2625,start_yr=1980,end_yr=
         year_range = year_range.replace(' ','')
 
         # create download string / url
-        download_string = "https://daymet.ornl.gov/data/send/saveData?lat=my_lat&lon=my_lon&measuredParams=tmax,tmin,dayl,prcp,srad,swe,vp&year=year_range"
+        download_string = "https://daymet.ornl.gov/single-pixel/api/data?lat=my_lat&lon=my_lon&vars=tmax,tmin,dayl,prcp,srad,swe,vp&year=year_range"
   
         # substitute input variables in download string
         download_string = download_string.replace("my_lat",str(lat))
