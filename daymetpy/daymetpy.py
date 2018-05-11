@@ -66,16 +66,18 @@ def daymet_timeseries(lat=36.0133, lon=-84.2625, start_year=2012, end_year=2014,
     try:
         urlretrieve(timeseries_url, daymet_file)
     except:
-        if os.path.isfile(daymet_file) 
+        if os.path.isfile(daymet_file):
             os.remove(daymet_file)
+
         raise NameError("You requested data is outside DAYMET coverage, the file is empty --> check coordinates!")
 
     # check if the file can be read (if not raise error)
     try:
         df = pd.read_csv(daymet_file, header=6)
     except:
-        if os.path.isfile(daymet_file) 
+        if os.path.isfile(daymet_file):
             os.remove(daymet_file)
+
         raise NameError("You requested data is outside DAYMET coverage, the file is empty --> check coordinates!")
  
     if as_dataframe:
@@ -123,7 +125,7 @@ def download_Daymet(site="Daymet",lat=36.0133,lon=-84.2625,start_yr=1980,end_yr=
         try:
             urlretrieve(timeseries_url, daymet_file)
         except:
-            if os.path.isfile(daymet_file) 
+            if os.path.isfile(daymet_file): 
                 os.remove(daymet_file)
             raise NameError("You requested data is outside DAYMET coverage, the file is empty --> check coordinates!")
 
@@ -131,7 +133,7 @@ def download_Daymet(site="Daymet",lat=36.0133,lon=-84.2625,start_yr=1980,end_yr=
         try:
             df = pd.read_csv(daymet_file, header=6)
         except:
-            if os.path.isfile(daymet_file) 
+            if os.path.isfile(daymet_file):
                 os.remove(daymet_file)
             raise NameError("You requested data is outside DAYMET coverage, the file is empty --> check coordinates!")
  
