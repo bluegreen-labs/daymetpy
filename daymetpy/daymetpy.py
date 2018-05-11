@@ -7,6 +7,7 @@ import csv
 import time
 import datetime
 import tempfile
+import pandas as pd
 
 if sys.version_info[0] == 3:
     from urllib.request import urlretrieve
@@ -63,13 +64,14 @@ def daymet_timeseries(lat=36.0133, lon=-84.2625, start_year=2012, end_year=2014,
     # download the daymet data (if available)
     urlretrieve(timeseries_url, daymet_file)
 
-    if os.path.getsize(daymet_file) == 0:
+    # check if the file can be read (if not raise error)
+    try:
+        df = pd.read_csv(daymet_file, header=6)
+    except:
         os.remove(daymet_file)
         raise NameError("You requested data is outside DAYMET coverage, the file is empty --> check coordinates!")
-    
+ 
     if as_dataframe:
-        import pandas as pd
-        df = pd.read_csv(daymet_file, header=6)
         df.index = pd.to_datetime(df.year.astype(int).astype(str) + '-' + df.yday.astype(int).astype(str), format="%Y-%j")
         df.columns = [c[:c.index('(')].strip() if '(' in c else c for c in df.columns ]
         return df
