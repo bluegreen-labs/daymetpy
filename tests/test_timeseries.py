@@ -2,7 +2,7 @@ import unittest
 from datetime import datetime, timedelta
 
 import sys
-sys.path.append(r"..")
+sys.path.append(r"../..")
 from daymetpy import daymet_timeseries
 
 class TimeseriesTest(unittest.TestCase):
