@@ -43,7 +43,7 @@ plt.legend(fontsize=20)
 ```
 
 ## Requirements
-No additional packages are required. Pandas / seaborn is required in the above example, but not for basic functionality.
+Pandas / seaborn are required.
 
 ## Contributors
 * Koen Hufkens: koen.hufkens@gmail.com
