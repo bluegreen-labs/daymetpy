@@ -61,8 +61,13 @@ def daymet_timeseries(lat=36.0133, lon=-84.2625, start_year=2012, end_year=2014,
     if verbose:
         print("File downloaded to:\n{}".format(daymet_file))
 
-    # download the daymet data (if available)
-    urlretrieve(timeseries_url, daymet_file)
+    # download the daymet data (if available), depending
+    # on the python version you need to trap an http error
+    try:
+        urlretrieve(timeseries_url, daymet_file)
+    except:
+        os.remove(daymet_file)
+        raise NameError("You requested data is outside DAYMET coverage, the file is empty --> check coordinates!")
 
     # check if the file can be read (if not raise error)
     try:
@@ -111,16 +116,22 @@ def download_Daymet(site="Daymet",lat=36.0133,lon=-84.2625,start_yr=1980,end_yr=
         # create filename for the output file
         daymet_file = str(site)+"_"+str(start_yr)+"_"+str(end_yr)+'.csv' 
   
-        # download the daymet data (if available)
-        urlretrieve(download_string,daymet_file)
-
-        if os.path.getsize(daymet_file) == 0:
+        # download the daymet data (if available), depending
+        # on the python version you need to trap an http error
+        try:
+            urlretrieve(timeseries_url, daymet_file)
+        except:
             os.remove(daymet_file)
             raise NameError("You requested data is outside DAYMET coverage, the file is empty --> check coordinates!")
-    
-        if as_dataframe:
-            import pandas as pd
+
+        # check if the file can be read (if not raise error)
+        try:
             df = pd.read_csv(daymet_file, header=6)
+        except:
+            os.remove(daymet_file)
+            raise NameError("You requested data is outside DAYMET coverage, the file is empty --> check coordinates!")
+ 
+        if as_dataframe:
             df.index = pd.to_datetime(df.year.astype(int).astype(str) + '-' + df.yday.astype(int).astype(str), format="%Y-%j")
             df.columns = [c[:c.index('(')].strip() if '(' in c else c for c in df.columns ]
             return df
