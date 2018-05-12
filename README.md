@@ -1,4 +1,7 @@
 ![build_status](https://api.travis-ci.org/khufkens/daymetpy.svg)
+![status](https://img.shields.io/pypi/status/daymetpy.svg)
+![version number](https://img.shields.io/pypi/v/daymetpy.svg)
+![python](https://img.shields.io/pypi/pyversions/daymetpy.svg)
 
 ## daymetpy: A python library for accessing Daymet surface weather data
  
