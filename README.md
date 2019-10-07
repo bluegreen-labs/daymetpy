@@ -35,11 +35,11 @@ denver = daymetpy.daymet_timeseries(lon=denver_loc[0], lat=denver_loc[1], start_
 miami = daymetpy.daymet_timeseries(lon=miami_loc[0], lat=miami_loc[1], start_year=2012, end_year=2014)
 
 fig, ax1 = plt.subplots(1, figsize=(18, 10))
-rolling3day = pd.rolling_mean(denver, 15)
+rolling3day = denver.rolling(15).mean()
 ax1.fill_between(rolling3day.index, rolling3day.tmin, rolling3day.tmax, 
                  alpha=0.4, lw=0, label='Denver', color=sns.xkcd_palette(['faded green'])[0])
 ax1.set_title('Denver vs Miami temps (15 day mean)', fontsize=20)
-rolling3day = pd.rolling_mean(miami, 15)
+rolling3day = miami.rolling(15).mean()
 ax1.fill_between(rolling3day.index, rolling3day.tmin, rolling3day.tmax, 
                  alpha=0.4, lw=0, label='Miami', color=sns.xkcd_palette(['dusty purple'])[0])
 ax1.set_ylabel(u'Temp. (°C)', fontsize=20)
